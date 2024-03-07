@@ -11,13 +11,17 @@ export class User extends Model {
 
   async $beforeInsert(context) {
     await super.$beforeInsert(context);
-    await this.doHashPassword();
+    this.password = await this.doHashPassword();
+
   }
 
   async doHashPassword() {
-    await bcrypt.hash(this.password, 10, (err, hash) => {
-      this.password = hash;
+    const pass = await new Promise((resolve, reject) => {
+      bcrypt.hash(this.password, 10, (err, hash) => {
+        resolve(hash);
+      });
     });
+    return pass;
   }
 }
 

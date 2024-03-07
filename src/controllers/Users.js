@@ -6,7 +6,7 @@ const index = async (req, res) => {
 }
 
 const create = async (req, res) => {
-  const record = await User.query().insertGraph(req.body)
+  const record = await User.query().insert(req.body)
   res.send({record})
 }
 
