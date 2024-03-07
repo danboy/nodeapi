@@ -9,10 +9,21 @@ export class User extends Model {
     return 'users';
   }
 
+  static get jsonSchema() {
+    return {
+      type: 'object',
+      required: ['email', 'password'],
+      properties: {
+        id: { type: 'integer' },
+        name: { type: 'string', minLength: 1, maxLength: 255 },
+        age: { type: 'number' } // optional
+      }
+    };
+  }
+
   async $beforeInsert(context) {
     await super.$beforeInsert(context);
     this.password = await this.doHashPassword();
-
   }
 
   async doHashPassword() {
