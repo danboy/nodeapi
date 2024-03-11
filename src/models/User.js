@@ -15,8 +15,8 @@ export class User extends Model {
       required: ['email', 'password'],
       properties: {
         id: { type: 'integer' },
-        name: { type: 'string', minLength: 1, maxLength: 255 },
-        age: { type: 'number' } // optional
+        email: { type: 'string', minLength: 1, maxLength: 255 },
+        first_name: { type: 'string', minLength: 1, maxLength: 255 },
       }
     };
   }

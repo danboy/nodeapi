@@ -1,3 +1,5 @@
+import errorHandler from "../helpers/errorHandler.js";
+
 import { User } from "../models/User.js";
 
 const index = async (req, res) => {
@@ -6,8 +8,12 @@ const index = async (req, res) => {
 }
 
 const create = async (req, res) => {
-  const record = await User.query().insert(req.body)
-  res.send({record})
+  try{
+    const record = await User.query().insert(req.body)
+    res.send({record})
+  }catch (error) {
+    errorHandler(error, res);
+  }
 }
 
 const destroy = async (req, res) => {
